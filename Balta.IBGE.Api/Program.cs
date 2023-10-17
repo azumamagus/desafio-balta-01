@@ -24,6 +24,16 @@ app.MapPost("/cities", async (City city, IbgeContext db) =>
     return Results.CreatedAtRoute($"/cities/{city.Id}");
 });
 
+app.MapGet("/cities", async (IbgeContext db) => await db.Cities.ToListAsync());
+
+app.MapGet("/cities/{id:int}", async (int id, IbgeContext db) =>
+{
+    return await db.Cities.FindAsync(id)
+                is City city
+                ? Results.Ok(city)
+                : Results.NotFound();
+});
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
