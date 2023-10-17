@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Balta.IBGE.Api.Migrations
 {
-    [DbContext(typeof(IbgeContext))]
+    [DbContext(typeof(IbgeDbContext))]
     [Migration("20231017210506_CreateDatabase")]
     partial class CreateDatabase
     {

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Balta.IBGE.Api.Data;
 
-public class IbgeContext : DbContext
+public class IbgeDbContext : DbContext
 {
-    public IbgeContext(DbContextOptions options) : base(options)
+    public IbgeDbContext(DbContextOptions options) : base(options)
     {
     }
 

@@ -12,11 +12,11 @@ builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<IbgeContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<IbgeDbContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
-app.MapPost("/cities", async (City city, IbgeContext db) =>
+app.MapPost("/cities", async (City city, IbgeDbContext db) =>
 {
     db.Cities.Add(city);
     await db.SaveChangesAsync();
@@ -24,9 +24,9 @@ app.MapPost("/cities", async (City city, IbgeContext db) =>
     return Results.CreatedAtRoute($"/cities/{city.Id}");
 });
 
-app.MapGet("/cities", async (IbgeContext db) => await db.Cities.ToListAsync());
+app.MapGet("/cities", async (IbgeDbContext db) => await db.Cities.ToListAsync());
 
-app.MapGet("/cities/{id:int}", async (int id, IbgeContext db) =>
+app.MapGet("/cities/{id:int}", async (int id, IbgeDbContext db) =>
 {
     return await db.Cities.FindAsync(id)
                 is City city

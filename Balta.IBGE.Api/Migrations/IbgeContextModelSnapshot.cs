@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Balta.IBGE.Api.Migrations
 {
-    [DbContext(typeof(IbgeContext))]
+    [DbContext(typeof(IbgeDbContext))]
     partial class IbgeContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
