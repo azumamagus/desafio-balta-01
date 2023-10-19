@@ -6,7 +6,7 @@ services:
       - "1433:1433"
     environment:
       - ACCEPT_EULA="Y"
-      - SA_PASSWORD=a!b@c#d$E5
+      - SA_PASSWORD=wq5p5*YQ#N
   redis:
     image: redis
     ports:
