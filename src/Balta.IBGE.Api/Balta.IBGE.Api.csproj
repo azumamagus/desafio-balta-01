@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Carter" Version="7.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.12">
       <PrivateAssets>all</PrivateAssets>
@@ -23,6 +24,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Balta.IBGE.Application\Balta.IBGE.Application.csproj" />
     <ProjectReference Include="..\Balta.IBGE.Infra\Balta.IBGE.Infra.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+    <Folder Include="Endpoints\" />
   </ItemGroup>
 
 </Project>

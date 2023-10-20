@@ -16,6 +16,10 @@ public class CityEntityTypeConfiguration : IEntityTypeConfiguration<City>
             .HasKey(c => c.Id);
 
         builder
+            .Property(c => c.Id)
+            .ValueGeneratedNever();
+
+        builder
             .Property(c => c.State)
             .HasMaxLength(2)
             .IsRequired();

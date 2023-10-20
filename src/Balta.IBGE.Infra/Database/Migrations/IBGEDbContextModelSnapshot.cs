@@ -24,10 +24,7 @@ namespace Balta.IBGE.Infra.Database.Migrations
             modelBuilder.Entity("Balta.IBGE.Domain.Cities.City", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()

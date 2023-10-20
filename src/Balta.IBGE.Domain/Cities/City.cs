@@ -2,6 +2,16 @@
 
 public class City
 {
+    public City(
+        int id,
+        string state,
+        string name)
+    {
+        Id = id;
+        State = state;
+        Name = name;
+    }
+
     protected City()
     { }
 

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Balta.IBGE.Infra.Database.Migrations
 {
     [DbContext(typeof(IBGEDbContext))]
-    [Migration("20231018234917_InitialVersion")]
+    [Migration("20231020183259_InitialVersion")]
     partial class InitialVersion
     {
         /// <inheritdoc />
@@ -27,10 +27,7 @@ namespace Balta.IBGE.Infra.Database.Migrations
             modelBuilder.Entity("Balta.IBGE.Domain.Cities.City", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()

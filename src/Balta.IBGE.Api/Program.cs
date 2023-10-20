@@ -1,7 +1,17 @@
+using Balta.IBGE.Application;
+using Balta.IBGE.Application.Behavior;
+using Balta.IBGE.Domain.Cities;
+using Balta.IBGE.Domain.Core;
 using Balta.IBGE.Infra;
 using Balta.IBGE.Infra.Database;
+using Balta.IBGE.Infra.UseCases.Cities;
+
+using Carter;
+
+using FluentValidation;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +26,7 @@ builder.Services.AddDbContext<IBGEDbContext>(options =>
 {
     options.UseSqlServer(connectionString,
         b => b.MigrationsAssembly(typeof(InfraAssemblyReference).Assembly.ToString()));
-    
+
     options.EnableDetailedErrors();
     options.EnableSensitiveDataLogging(true);
     options.LogTo(action: Console.WriteLine,
@@ -27,31 +37,22 @@ builder.Services.AddDbContext<IBGEDbContext>(options =>
                   minimumLevel: LogLevel.Information);
 });
 
-var app = builder.Build();
-
-//app.MapPost("/cities", async (City city, IbgeDbContext db) =>
-//{
-//    db.Cities.Add(city);
-//    await db.SaveChangesAsync();
-
-//    return Results.Created($"/cities/{city.Id}", city);
-//});
-
-//app.MapGet("/cities", async (IbgeDbContext db) => await db.Cities.ToListAsync());
-
-//app.MapGet("/cities/{id:int}", async (int id, IbgeDbContext db) =>
-//{
-//    return await db.Cities.FindAsync(id)
-//                is City city
-//                ? Results.Ok(city)
-//                : Results.NotFound();
-//});
-
-if (app.Environment.IsDevelopment())
+builder.Services.AddMediatR(configuration =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    configuration.RegisterServicesFromAssembly(typeof(ApplicationAssemblyReference).Assembly);
+    configuration.AddOpenBehavior(typeof(LoggingBehavior<,>));
+    configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));
+});
+
+builder.Services.AddValidatorsFromAssembly(typeof(ApplicationAssemblyReference).Assembly);
+builder.Services.TryAddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.TryAddScoped<ICityRepository, CityRepository>();
+builder.Services.AddCarter();
+
+var app = builder.Build();
+app.UseSwagger();
+app.UseSwaggerUI();
+app.MapCarter();
 
 using IServiceScope serviceScope = app.Services.CreateScope();
 using IBGEDbContext dbContext = serviceScope.ServiceProvider.GetRequiredService<IBGEDbContext>();

@@ -9,11 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Balta.IBGE.Domain\Balta.IBGE.Domain.csproj" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.0" />
+    <PackageReference Include="MediatR" Version="12.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\Cities\Create\" />
+    <ProjectReference Include="..\Balta.IBGE.Domain\Balta.IBGE.Domain.csproj" />
   </ItemGroup>
 
 </Project>
