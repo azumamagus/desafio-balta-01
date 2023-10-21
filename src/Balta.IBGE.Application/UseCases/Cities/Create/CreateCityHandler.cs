@@ -22,7 +22,7 @@ internal sealed class CreateCityHandler : IRequestHandler<CreateCityCommand, Res
     {
         var city = new City(request.Id, request.State, request.Name);
 
-        await _cityRepository.AddAsync(city);
+        await _cityRepository.AddAsync(city, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return Result.Success(city.Id);

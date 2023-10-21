@@ -2,5 +2,5 @@
 
 public interface ICityRepository
 {
-    Task AddAsync(City city);
+    Task AddAsync(City city, CancellationToken cancellationToken);
 }

@@ -10,6 +10,6 @@ public class CityRepository : ICityRepository
     public CityRepository(IBGEDbContext dbContext)
         => _dbContext = dbContext;
 
-    public async Task AddAsync(City city)
-        => await _dbContext.AddAsync(city);
+    public async Task AddAsync(City city, CancellationToken cancellationToken)
+        => await _dbContext.Cities.AddAsync(city, cancellationToken);
 }
