@@ -1,4 +1,5 @@
 ﻿using Balta.IBGE.Application.UseCases.Cities.Create;
+using Balta.IBGE.Application.UseCases.Cities.Get;
 
 using Carter;
 
@@ -14,8 +15,14 @@ public class CitiesEndpoints : ICarterModule
             .MapGroup("cities")
             .WithTags("Cities");
 
-        citiesGroup.MapGet("", ()
-            => Results.Ok("Retornar a lista de cidades cadastradas."));
+        citiesGroup.MapGet("", async(ISender sender) =>
+        {
+            var query = new GetAllCitiesHandler();
+            var result = await sender.Send(query);
+
+            return result.IsFailure ? Results.NotFound(result.Errors.ToList()) : Results.Ok(result);
+        });
+            
 
         citiesGroup.MapGet("{id:int}", ()
             => Results.Ok("Retornar os dados da cidade filtrada pelo ID."));

@@ -1,6 +1,8 @@
 ﻿using Balta.IBGE.Domain.Cities;
 using Balta.IBGE.Infra.Database;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace Balta.IBGE.Infra.UseCases.Cities;
 
 public class CityRepository : ICityRepository
@@ -12,4 +14,6 @@ public class CityRepository : ICityRepository
 
     public async Task AddAsync(City city)
         => await _dbContext.AddAsync(city);
+    public async Task<List<City>> GetAllAsync() 
+        => await _dbContext.Cities.ToListAsync();
 }
