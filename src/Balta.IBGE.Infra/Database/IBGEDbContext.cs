@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 
+using Balta.IBGE.Domain.Accounts.Entities;
 using Balta.IBGE.Domain.Cities;
 
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ public class IBGEDbContext : DbContext
         : base(options)
     { }
 
+    public DbSet<User> Users{ get; set; }
     public DbSet<City> Cities { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
