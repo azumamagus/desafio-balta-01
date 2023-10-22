@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 
 using Balta.IBGE.Domain.Accounts.Entities;
-using Balta.IBGE.Domain.Cities;
+using Balta.IBGE.Domain.Cities.Entities;
 
 using Microsoft.EntityFrameworkCore;
 

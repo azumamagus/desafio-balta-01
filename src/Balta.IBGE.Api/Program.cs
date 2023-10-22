@@ -1,7 +1,8 @@
+using Balta.IBGE.Api.Middleware;
 using Balta.IBGE.Application;
 using Balta.IBGE.Application.Behavior;
 using Balta.IBGE.Domain.Accounts.Repositories;
-using Balta.IBGE.Domain.Cities;
+using Balta.IBGE.Domain.Cities.Repositories;
 using Balta.IBGE.Domain.Core;
 using Balta.IBGE.Domain.Core.Configuration;
 using Balta.IBGE.Domain.Core.Extensions;
@@ -25,6 +26,22 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+Configuration.Database.ConnectionString =
+    builder.Configuration.GetConnectionString("DefaultConnection") ?? string.Empty;
+
+Configuration.Secrets.JwtPrivateKey =
+    builder.Configuration.GetSection("Secrets").GetValue<string>("JwtPrivateKey") ?? string.Empty;
+Configuration.Secrets.PasswordSaltKey =
+    builder.Configuration.GetSection("Secrets").GetValue<string>("PasswordSaltKey") ?? string.Empty;
+
+Configuration.SendGrid.ApiKey =
+    builder.Configuration.GetSection("SendGrid").GetValue<string>("ApiKey") ?? string.Empty;
+
+Configuration.Email.DefaultFromName =
+    builder.Configuration.GetSection("Email").GetValue<string>("DefaultFromName") ?? string.Empty;
+Configuration.Email.DefaultFromEmail =
+    builder.Configuration.GetSection("Email").GetValue<string>("DefaultFromEmail") ?? string.Empty;
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -59,6 +76,8 @@ builder.Services.TryAddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.TryAddScoped<ICityRepository, CityRepository>();
 builder.Services.TryAddScoped<IUserRepository, UserRepository>();
 builder.Services.TryAddScoped<ISendEmailService, SendEmailService>();
+builder.Services.TryAddTransient<LoggingContextMiddleware>();
+builder.Services.TryAddTransient<GlobalExceptionMiddleware>();
 
 builder.Services.AddCarter();
 
@@ -76,9 +95,12 @@ builder.Services.AddOptions<Configuration.SecretsConfiguration>()
     });
 
 var app = builder.Build();
+
 app.UseSwagger();
 app.UseSwaggerUI();
 app.MapCarter();
+app.UseMiddleware<LoggingContextMiddleware>();
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 using IServiceScope serviceScope = app.Services.CreateScope();
 using IBGEDbContext dbContext = serviceScope.ServiceProvider.GetRequiredService<IBGEDbContext>();

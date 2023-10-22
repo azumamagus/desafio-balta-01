@@ -26,6 +26,8 @@ public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, Result<G
 
     public async Task<Result<Guid>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
+        throw new Exception("Forced Exception");
+
         var email = new Email(request.Email);
         var password = new Password(request.Password);
         var user = new User(email, password);
