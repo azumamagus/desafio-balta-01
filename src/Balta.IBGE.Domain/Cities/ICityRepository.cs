@@ -3,5 +3,7 @@
 public interface ICityRepository
 {
     Task AddAsync(City city);
-    Task<List<City>> GetAllAsync();
+    Task<IEnumerable<City>> GetAllAsync();
+    Task<City?> GetByIdAsync(int id);
+    Task DeleteAsync(City city);
 }
