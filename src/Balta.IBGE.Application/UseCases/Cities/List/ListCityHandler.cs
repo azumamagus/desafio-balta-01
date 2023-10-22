@@ -1,13 +1,14 @@
 ﻿using System.Linq.Expressions;
 
 using Balta.IBGE.Application.Extensions;
+using Balta.IBGE.Application.UseCases.Cities.ViewModels;
 using Balta.IBGE.Domain.Cities.Entities;
 using Balta.IBGE.Domain.Cities.Repositories;
 using Balta.IBGE.Domain.Core;
 
 using MediatR;
 
-namespace Balta.IBGE.Application.UseCases.Cities.Get
+namespace Balta.IBGE.Application.UseCases.Cities.List
 {
     public class ListCityHandler : IRequestHandler<ListCityQuery, Result<IEnumerable<CityViewModel>>>
     {

@@ -1,7 +1,5 @@
 ﻿using System.Linq.Expressions;
 
-using Azure;
-
 using Balta.IBGE.Domain.Cities.Entities;
 using Balta.IBGE.Domain.Cities.Repositories;
 using Balta.IBGE.Infra.Database;
@@ -31,12 +29,10 @@ public class CityRepository : ICityRepository
             .Take(pageSize)
             .OrderBy(c => c.Name)
             .ToListAsync(cancellationToken);
-    public async Task<IEnumerable<City>> GetAllAsync() 
-        => await _dbContext.Cities.ToListAsync();
     
-    public async Task<City?> GetByIdAsync(int id)
-        => await _dbContext.Cities.FindAsync(id);
+    public async Task<City?> GetByIdAsync(int id, CancellationToken cancellationToken)
+        => await _dbContext.Cities.FindAsync(id, cancellationToken);
     
-    public async Task DeleteAsync(City city) 
+    public void Remove(City city) 
         => _dbContext.Cities.Remove(city);
 }

@@ -1,15 +1,11 @@
 ﻿using Balta.IBGE.Application.UseCases.Cities.Create;
 using Balta.IBGE.Application.UseCases.Cities.Delete;
-using Balta.IBGE.Application.UseCases.Cities.Get.GetAllCities;
-using Balta.IBGE.Application.UseCases.Cities.Get.GetCityById;
-using Balta.IBGE.Domain.Core;
-using Balta.IBGE.Application.UseCases.Cities.Get;
+using Balta.IBGE.Application.UseCases.Cities.GetById;
+using Balta.IBGE.Application.UseCases.Cities.List;
 
 using Carter;
 
 using MediatR;
-
-using Microsoft.AspNetCore.Mvc;
 
 namespace Balta.IBGE.Api.UsesCases.Cities;
 

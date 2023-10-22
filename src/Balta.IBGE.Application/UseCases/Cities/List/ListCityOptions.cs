@@ -1,4 +1,4 @@
-﻿namespace Balta.IBGE.Application.UseCases.Cities.Get;
+﻿namespace Balta.IBGE.Application.UseCases.Cities.List;
 
 public record ListCityOptions(
     int? Id,
