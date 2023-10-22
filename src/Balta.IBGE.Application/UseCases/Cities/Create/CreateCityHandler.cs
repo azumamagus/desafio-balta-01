@@ -1,4 +1,5 @@
-﻿using Balta.IBGE.Domain.Cities;
+﻿using Balta.IBGE.Domain.Cities.Entities;
+using Balta.IBGE.Domain.Cities.Repositories;
 using Balta.IBGE.Domain.Core;
 
 using MediatR;

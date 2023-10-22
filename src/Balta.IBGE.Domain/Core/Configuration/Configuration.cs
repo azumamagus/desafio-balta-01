@@ -14,8 +14,8 @@ public static class Configuration
 
     public class EmailConfiguration
     {
-        public string DefaultFromEmail { get; set; } = "suporte@maisqueum.dev";
         public string DefaultFromName { get; set; } = "maisqueum.dev";
+        public string DefaultFromEmail { get; set; } = "suporte@maisqueum.dev";
     }
 
     public class SendGridConfiguration

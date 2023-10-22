@@ -1,4 +1,4 @@
-﻿using Balta.IBGE.Domain.Cities;
+﻿using Balta.IBGE.Domain.Cities.Entities;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

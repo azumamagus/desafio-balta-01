@@ -1,4 +1,4 @@
-﻿namespace Balta.IBGE.Domain.Cities;
+﻿namespace Balta.IBGE.Domain.Cities.Entities;
 
 public class City
 {
