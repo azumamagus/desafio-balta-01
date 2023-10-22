@@ -1,6 +1,8 @@
 <h1 align="center">Balta Challenge 01</h1>
 <p align="center"><i>Repository for versioning and documentation of the project used during the [balta](https://balta.io/) challenge 01.</i></p>
 
+[![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)
+
 
 Para finalizar o nosso README podemos adicionar estatísticas sobre o repositório como Linguagem mais utilizada, Número de linguagens presentes, qualidade do código e muitas outras através da ferramenta oferecida pela Codacy. Não abordaremos aqui como cadastrar seu repositório e ter acesso a estas estatísticas já que no site deles já tem uma documentação completa sobre isto. Veja como fica:
 
