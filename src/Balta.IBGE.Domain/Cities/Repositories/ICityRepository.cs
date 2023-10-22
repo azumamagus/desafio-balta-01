@@ -12,4 +12,7 @@ public interface ICityRepository
         int pageNumber,
         int pageSize,
         CancellationToken cancellationToken);
+    Task<IEnumerable<City>> GetAllAsync();
+    Task<City?> GetByIdAsync(int id);
+    Task DeleteAsync(City city);
 }

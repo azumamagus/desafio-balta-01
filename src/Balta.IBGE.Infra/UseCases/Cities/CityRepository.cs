@@ -31,4 +31,12 @@ public class CityRepository : ICityRepository
             .Take(pageSize)
             .OrderBy(c => c.Name)
             .ToListAsync(cancellationToken);
+    public async Task<IEnumerable<City>> GetAllAsync() 
+        => await _dbContext.Cities.ToListAsync();
+    
+    public async Task<City?> GetByIdAsync(int id)
+        => await _dbContext.Cities.FindAsync(id);
+    
+    public async Task DeleteAsync(City city) 
+        => _dbContext.Cities.Remove(city);
 }
