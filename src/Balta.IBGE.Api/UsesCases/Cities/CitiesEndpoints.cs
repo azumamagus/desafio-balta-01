@@ -2,10 +2,13 @@
 using Balta.IBGE.Application.UseCases.Cities.Delete;
 using Balta.IBGE.Application.UseCases.Cities.GetById;
 using Balta.IBGE.Application.UseCases.Cities.List;
+using Balta.IBGE.Application.UseCases.Cities.Put;
 
 using Carter;
 
 using MediatR;
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace Balta.IBGE.Api.UsesCases.Cities;
 
@@ -24,7 +27,7 @@ public class CitiesEndpoints : ICarterModule
                 ? Results.UnprocessableEntity(result.Errors.ToList())
                 : Results.Ok(result.Value);
         });
-        
+
         citiesGroup.MapGet("{id:int}", async (int id, ISender sender) =>
         {
             var result = await sender.Send(new GetCityByIdQuery(id));
@@ -32,7 +35,7 @@ public class CitiesEndpoints : ICarterModule
             return result.IsFailure
                 ? Results.NotFound(result.Errors.ToList())
                 : Results.Ok(result.Value);
-        });  
+        });
 
         citiesGroup.MapPost(string.Empty, async (CreateCityCommand request, ISender sender) =>
         {
@@ -42,17 +45,24 @@ public class CitiesEndpoints : ICarterModule
                 : Results.Created($"/cities/{result.Value}", result.Value);
         });
 
-        citiesGroup.MapPut("{id:int}", ()
-            => Results.NoContent());
+        citiesGroup.MapPut("{id:int}", async (int id, PutCityCommand request, ISender sender) =>
+        {
+            var result = await sender.Send(request);
+
+            return result.IsFailure 
+            ? Results.UnprocessableEntity(result.Errors.ToList()) 
+            : Results.NoContent();
+        });
+
 
         citiesGroup.MapDelete("{id:int}", async (int id, ISender sender) =>
         {
             var result = await sender.Send(new DeleteCityCommand(id));
-            
-            return result.IsFailure 
-                ? Results.NotFound(result.Errors.ToList()) 
+
+            return result.IsFailure
+                ? Results.NotFound(result.Errors.ToList())
                 : Results.NoContent();
-        });            
+        });
 
         citiesGroup.MapPost("import", ()
             => Results.Ok("Importar a planilha com os dados das cidades"));

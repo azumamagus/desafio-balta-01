@@ -14,4 +14,5 @@ public interface ICityRepository
         CancellationToken cancellationToken);
     Task<City?> GetByIdAsync(int id, CancellationToken cancellationToken);
     void Remove(City city);
+    void Update(City city);
 }

@@ -35,4 +35,6 @@ public class CityRepository : ICityRepository
     
     public void Remove(City city) 
         => _dbContext.Cities.Remove(city);
+    public void Update(City city)
+        => _dbContext.Cities.Update(city);
 }
