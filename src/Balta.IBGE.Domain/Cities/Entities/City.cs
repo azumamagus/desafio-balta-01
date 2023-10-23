@@ -18,4 +18,11 @@ public class City
     public int Id { get; private set; }
     public string State { get; private set; } = null!;
     public string Name { get; private set; } = null!;
+
+    public void UpdateCity(int NewId, string NewState, string NewName)
+    {
+        Id = NewId;
+        State = NewState;
+        Name = NewName;
+    }
 }
